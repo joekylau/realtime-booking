@@ -1,14 +1,20 @@
 const Koa = require('koa');
-const serve = require('koa-static');
 
 const app = new Koa();
 const http = require('http').createServer(app.callback());
-const io = require('socket.io')(http);
-
-app.use(serve(__dirname + '/public'));
+const io = require('socket.io')(http, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log('user connected', socket.id);
+    socket.on('disconnect', () => {
+        console.log('user disconnected', socket.id);
+    });
+
     socket.on('create booking', (booking) => {
         io.emit('create booking', booking);
     });
