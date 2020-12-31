@@ -7,4 +7,8 @@ services:
   client-html:
     build: ./client-html
     ports:
-      - 5000:80
+      - 4000:80
+  client-nuxtjs:
+    build: ./client-nuxtjs
+    ports:
+      - 5000:5000
