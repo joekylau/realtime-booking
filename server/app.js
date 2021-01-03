@@ -15,8 +15,8 @@ io.on('connection', (socket) => {
         console.log('user disconnected', socket.id);
     });
 
-    socket.on('create booking', (booking) => {
-        io.emit('create booking', booking);
+    socket.on('createBooking', (booking) => {
+        io.emit('createBooking', booking);
     });
 });
 

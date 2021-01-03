@@ -69,7 +69,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             var datepickers = document.querySelectorAll('.datepicker');
             var timepickers = document.querySelectorAll('.timepicker');
-            
+
             M.Datepicker.init(datepickers, {});
             M.Timepicker.init(timepickers, {
                 "twelveHour": false
@@ -79,10 +79,10 @@
         $('form').submit(function (e) {
             const dp_date = M.Datepicker.getInstance(document.querySelector('#dp_date'));
             const tp_time_from = M.Timepicker.getInstance(document.querySelector('#tp_time_from'));
-            const tp_time_to = M.Timepicker.getInstance(document.querySelector('#tp_time_to')) 
+            const tp_time_to = M.Timepicker.getInstance(document.querySelector('#tp_time_to'))
 
             e.preventDefault();
-            socket.emit('create booking', {
+            socket.emit('createBooking', {
                 "customer": $('#tb_customer').val(),
                 "date": moment(dp_date.date).format('YYYY-MM-DD'),
                 "time_from": tp_time_from.time,
@@ -92,7 +92,7 @@
             return false;
         });
 
-        socket.on('create booking', function(booking) {
+        socket.on('createBooking', function(booking) {
             $('#ul_booking').append($('<li>').addClass('collection-item').text(`${booking.customer} on ${booking.date} (${booking.time_from} - ${booking.time_to})`));
         });
     </script>
